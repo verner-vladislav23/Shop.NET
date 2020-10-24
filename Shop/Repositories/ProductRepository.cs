@@ -44,7 +44,7 @@ namespace Shop.Repositories
     {
       if (product == null)
       {
-        throw new ArgumentNullException("item");
+        throw new ArgumentNullException("Product is null");
       }
     
       product.Id = _nextId++;
@@ -58,7 +58,7 @@ namespace Shop.Repositories
     {
       if (product == null)
       {
-        throw new ArgumentNullException("item");
+        throw new ArgumentNullException("Not found");
       }
       
       var index = products.FindIndex(p => p.Id == product.Id);
@@ -75,6 +75,11 @@ namespace Shop.Repositories
     
     public void RemoveProduct(int id)
     {
+      if (id == null)
+      {
+        throw new ArgumentNullException("Not Found");
+      }
+      
       products.RemoveAll(p => p.Id == id);
     }
   }
