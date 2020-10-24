@@ -19,16 +19,17 @@ namespace Shop.Controllers
 
 
     [HttpGet]
-    public IActionResult Products()
+    public IActionResult Index()
     {
       return View(repository.GetProductList());
     }
 
-    [HttpDelete]
+    [HttpPost]
     [ActionName("Delete")]
-    public void Delete(int id)
+    public IActionResult Delete(int id)
     {
       repository.RemoveProduct(id);
+      return View("~/Views/Product/Index.cshtml");
     }
   }
 }

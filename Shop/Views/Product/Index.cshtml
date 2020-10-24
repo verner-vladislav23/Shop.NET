@@ -18,14 +18,14 @@
             <img class="card-img-top" src="@product.Image" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@product.Name</h5>
-                <button
+                <a
                     class="btn btn-danger"
                     asp-controller="Product"
                     asp-action="Delete"
                     asp-route-id="@product.Id"
                 >
                     Удалить
-                </button>
+                </a>
             </div>
         </div>
     }
