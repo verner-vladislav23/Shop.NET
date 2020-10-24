@@ -12,23 +12,77 @@
 </head>
 <body>
 <div>
-    @foreach(var product in Model)
+    <div class="alert alert-success alert-delete d-none">
+        <p>Товар успешно удален</p>
+    </div>
+    <button 
+        class="btn btn-success btn-create-product"
+        type="button"
+        data-target="#createProductModal"
+        data-toggle="modal"
+    >
+        Создать товар
+    </button>
+    @foreach (var product in Model)
     {
-        <div class="card" style="width: 18rem;">
+        <div class="card product-item" id="productItem-@product.Id" style="width: 18rem;">
             <img class="card-img-top" src="@product.Image" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@product.Name</h5>
                 <a
-                    class="btn btn-danger"
-                    asp-controller="Product"
-                    asp-action="Delete"
-                    asp-route-id="@product.Id"
-                >
+                    class="btn btn-danger btn-delete-product"
+                    data-product-id="@product.Id">
                     Удалить
                 </a>
             </div>
         </div>
     }
+    
+    
+    <div class="modal fade" id="createProductModal" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Создание товара</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="createProductForm">
+              <div class="row">
+                <div class="col">
+                  <label for="productNameInput">Название товара</label>
+                  <input 
+                    name="Name"
+                    type="text"
+                    class="form-control"
+                    id="productNameInput"
+                    required
+                    placeholder="Введите название товара"
+                  >
+                </div>
+                <div class="col">
+                  <label for="productPriceInput">Цена</label>
+                  <input
+                    name="Price"
+                    type="number"
+                    class="form-control"
+                    id="productPriceInput"
+                    required
+                    placeholder="129.80р."
+                  >
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                <button type="submit" class="btn btn-primary">Создать</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 </body>
 </html>

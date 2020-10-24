@@ -17,19 +17,27 @@ namespace Shop.Controllers
       this.repository = repository;
     }
 
-
     [HttpGet]
     public IActionResult Index()
     {
       return View(repository.GetProductList());
     }
-
+    
     [HttpPost]
+    public Product Create(Product product)
+    {
+      var resultProduct = repository.CreateProduct(product);
+
+      return resultProduct;
+    }
+
+    [HttpDelete]
     [ActionName("Delete")]
     public IActionResult Delete(int id)
     {
       repository.RemoveProduct(id);
-      return View("~/Views/Product/Index.cshtml");
+
+      return Ok();
     }
   }
 }

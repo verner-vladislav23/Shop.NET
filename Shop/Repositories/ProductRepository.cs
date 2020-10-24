@@ -19,14 +19,12 @@ namespace Shop.Repositories
       CreateProduct(new Product
       {
         Name = "IPhone 12 MINI",
-        Price = 75000,
-        Image = DEFAULT_IMAGE_URL
+        Price = 75000
       });
       CreateProduct(new Product
       {
         Name = "IPhone 8 Plus",
-        Price = 35000,
-        Image = DEFAULT_IMAGE_URL
+        Price = 35000
       });
     }
     
@@ -46,7 +44,8 @@ namespace Shop.Repositories
       {
         throw new ArgumentNullException("Product is null");
       }
-    
+
+      product.Image = DEFAULT_IMAGE_URL;
       product.Id = _nextId++;
       products.Add(product);
     

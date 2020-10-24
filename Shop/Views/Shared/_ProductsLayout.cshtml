@@ -11,5 +11,48 @@
 @RenderBody()
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+$(document).ready(function ()  {
+    $('.btn-delete-product').on('click', function () {
+        const productId = $(this).data('product-id')
+        
+        $.ajax({
+            type: 'DELETE',
+            contentType: 'application/json',
+            url: `Product/Delete/${productId}`,
+            success: function (data) {
+                $(`#productItem-${productId}`).remove()
+                $('.alert-delete').removeClass('d-none')
+              
+                setTimeout(() => {
+                    $('.alert-delete').addClass('d-none')
+                }, 3000)
+               
+            },
+            error: function (error) {
+            }
+        })
+    })
+    
+    $('#createProductForm').on('submit', function (event) {
+        event.preventDefault()
+        const product = {}
+        $(this).serializeArray().map(field => {
+            product[field.name] = field.value
+        })
+        
+        $.ajax({
+            type: 'POST',
+            url: 'Product/Create',
+            data: JSON.stringify(product),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (data) {
+                console.log(data)
+            }
+        })
+    })
+})
+</script>
 </body>
 </html>
